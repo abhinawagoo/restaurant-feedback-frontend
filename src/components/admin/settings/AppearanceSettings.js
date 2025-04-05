@@ -111,7 +111,7 @@ export default function AppearanceSettings({ restaurant, onUpdate }) {
           <CardHeader>
             <CardTitle>Appearance Settings</CardTitle>
             <CardDescription>
-              Customize your restaurant's colors, fonts, and layout
+              Customize your restaurant&apos;s colors, fonts, and layout
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

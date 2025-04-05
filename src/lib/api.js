@@ -173,13 +173,13 @@ export const feedbackService = {
   getFormResponses: async (formId, params = {}) => {
     const queryParams = new URLSearchParams();
     
-    if (params.page) queryParams.append('page', params.page);
-    if (params.limit) queryParams.append('limit', params.limit);
-    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
-    if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder);
+    if (params.page) queryParams.append(&apos;page&apos;, params.page);
+    if (params.limit) queryParams.append(&apos;limit&apos;, params.limit);
+    if (params.sortBy) queryParams.append(&apos;sortBy&apos;, params.sortBy);
+    if (params.sortOrder) queryParams.append(&apos;sortOrder&apos;, params.sortOrder);
     
     const queryString = queryParams.toString();
-    return await api.get(`/analytics/forms/${formId}/responses${queryString ? `?${queryString}` : ''}`);
+    return await api.get(`/analytics/forms/${formId}/responses${queryString ? `?${queryString}` : &apos;&apos;}`);
   },
   
   // Get a single question
@@ -195,13 +195,13 @@ export const feedbackService = {
   getQuestionResponses: async (questionId, params = {}) => {
     const queryParams = new URLSearchParams();
     
-    if (params.page) queryParams.append('page', params.page);
-    if (params.limit) queryParams.append('limit', params.limit);
-    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
-    if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder);
+    if (params.page) queryParams.append(&apos;page&apos;, params.page);
+    if (params.limit) queryParams.append(&apos;limit&apos;, params.limit);
+    if (params.sortBy) queryParams.append(&apos;sortBy&apos;, params.sortBy);
+    if (params.sortOrder) queryParams.append(&apos;sortOrder&apos;, params.sortOrder);
     
     const queryString = queryParams.toString();
-    return await api.get(`/analytics/questions/${questionId}/responses${queryString ? `?${queryString}` : ''}`);
+    return await api.get(`/analytics/questions/${questionId}/responses${queryString ? `?${queryString}` : &apos;&apos;}`);
   },
   
   // Get a single feedback response
@@ -220,16 +220,16 @@ export const feedbackService = {
   },
   
   // Export form data (all responses)
-  exportFormData: async (formId, format = 'csv') => {
+  exportFormData: async (formId, format = &apos;csv&apos;) => {
     return await api.get(`/analytics/forms/${formId}/export?format=${format}`, {
-      responseType: 'blob'
+      responseType: &apos;blob&apos;
     });
   },
 
   // Export question data
-  exportQuestionData: async (questionId, format = 'csv') => {
+  exportQuestionData: async (questionId, format = &apos;csv&apos;) => {
     return await api.get(`/analytics/questions/${questionId}/export?format=${format}`, {
-      responseType: 'blob'
+      responseType: &apos;blob&apos;
     });
   },
 
@@ -237,7 +237,7 @@ export const feedbackService = {
 
 // Create the API services for menu management
 // src/services/menuService.js
-// import api from '@/lib/api';
+// import api from &apos;@/lib/api&apos;;
 
 export const menuService = {
   // Get menu items for a restaurant public

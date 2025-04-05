@@ -1,16 +1,16 @@
 // src/components/feedback/analytics/FeedbackSummary.js
-import React from 'react';
+import React from &apos;react&apos;;
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, Cell } from 'recharts';
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, Cell } from &apos;recharts&apos;;
 
 const FeedbackSummary = ({ analyticsData, formData }) => {
-  // Response rate calculation - sample data since we don't know your exact structure
+  // Response rate calculation - sample data since we don&apos;t know your exact structure
   const responseRate = (analyticsData.totalResponses / analyticsData.totalViews) * 100 || 0;
   
   // Color constants for charts
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+  const COLORS = [&apos;#0088FE&apos;, &apos;#00C49F&apos;, &apos;#FFBB28&apos;, &apos;#FF8042&apos;, &apos;#8884d8&apos;];
 
   // Example NPS calculation - adjust according to your data structure
   const calculateNPS = () => {
@@ -59,15 +59,15 @@ const FeedbackSummary = ({ analyticsData, formData }) => {
             <CardTitle className="text-sm font-medium text-gray-500">Average Rating</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col">
-            <div className="text-3xl font-bold">{analyticsData.averageRating?.toFixed(1) || 'N/A'}</div>
+            <div className="text-3xl font-bold">{analyticsData.averageRating?.toFixed(1) || &apos;N/A&apos;}</div>
             <div className="flex items-center mt-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <svg
                   key={star}
                   className={`w-4 h-4 ${
                     star <= Math.round(analyticsData.averageRating || 0)
-                      ? 'text-yellow-400'
-                      : 'text-gray-300'
+                      ? &apos;text-yellow-400&apos;
+                      : &apos;text-gray-300&apos;
                   }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -161,9 +161,9 @@ const FeedbackSummary = ({ analyticsData, formData }) => {
                 <PieChart>
                   <Pie
                     data={[
-                      { name: 'Promoters', value: analyticsData.npsData?.promoters || 0, fill: '#00C49F' },
-                      { name: 'Passives', value: analyticsData.npsData?.passives || 0, fill: '#FFBB28' },
-                      { name: 'Detractors', value: analyticsData.npsData?.detractors || 0, fill: '#FF8042' },
+                      { name: &apos;Promoters&apos;, value: analyticsData.npsData?.promoters || 0, fill: &apos;#00C49F&apos; },
+                      { name: &apos;Passives&apos;, value: analyticsData.npsData?.passives || 0, fill: &apos;#FFBB28&apos; },
+                      { name: &apos;Detractors&apos;, value: analyticsData.npsData?.detractors || 0, fill: &apos;#FF8042&apos; },
                     ]}
                     cx="50%"
                     cy="50%"

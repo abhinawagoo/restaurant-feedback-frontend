@@ -1,9 +1,9 @@
-/** @type {import('next').NextConfig} */
+/** @type {import(&apos;next&apos;).NextConfig} */
 const nextConfig = {
   // Add font optimization configuration
   optimizeFonts: true,
 
-  // If you're using app directory
+  // If you&apos;re using app directory
   experimental: {
     fontLoaders: [
       { loader: "@next/font/google", options: { subsets: ["latin"] } },
