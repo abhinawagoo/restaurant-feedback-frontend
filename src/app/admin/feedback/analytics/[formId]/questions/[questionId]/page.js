@@ -37,6 +37,8 @@ export default function QuestionAnalysisPage() {
   const [analytics, setAnalytics] = useState(null);
   const [responses, setResponses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const { formId, questionId } = params;
 
   useEffect(() => {
@@ -301,7 +303,6 @@ export default function QuestionAnalysisPage() {
       );
     };
     
-    const [activeIndex, setActiveIndex] = useState(0);
     const onPieEnter = (_, index) => {
       setActiveIndex(index);
     };
