@@ -1,23 +1,23 @@
 // // src/components/feedback/customer/CustomerFeedbackForm.js
-// 'use client';
+// &apos;use client&apos;;
 
-// import { useState, useEffect } from 'react';
-// import { useRouter, useSearchParams } from 'next/navigation';
-// import { Button } from '@/components/ui/button';
-// import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-// import { Progress } from '@/components/ui/progress';
-// import { feedbackService, restaurantService } from '@/lib/api';
-// import { toast } from 'sonner';
-// import RatingQuestion from './questions/RatingQuestion';
-// import TextQuestion from './questions/TextQuestion';
-// import MultipleChoiceQuestion from './questions/MultipleChoiceQuestion';
-// import CheckboxQuestion from './questions/CheckboxQuestion';
-// import DropdownQuestion from './questions/DropdownQuestion';
-// import GoogleReviewSummary from './GoogleReviewSummary';
+// import { useState, useEffect } from &apos;react&apos;;
+// import { useRouter, useSearchParams } from &apos;next/navigation&apos;;
+// import { Button } from &apos;@/components/ui/button&apos;;
+// import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from &apos;@/components/ui/card&apos;;
+// import { Progress } from &apos;@/components/ui/progress&apos;;
+// import { feedbackService, restaurantService } from &apos;@/lib/api&apos;;
+// import { toast } from &apos;sonner&apos;;
+// import RatingQuestion from &apos;./questions/RatingQuestion&apos;;
+// import TextQuestion from &apos;./questions/TextQuestion&apos;;
+// import MultipleChoiceQuestion from &apos;./questions/MultipleChoiceQuestion&apos;;
+// import CheckboxQuestion from &apos;./questions/CheckboxQuestion&apos;;
+// import DropdownQuestion from &apos;./questions/DropdownQuestion&apos;;
+// import GoogleReviewSummary from &apos;./GoogleReviewSummary&apos;;
 
 // export default function CustomerFeedbackForm({ formId, restaurantId, visitId, onComplete }) {
 //   const searchParams = useSearchParams();
-//   const phoneNumber = searchParams.get('phone');
+//   const phoneNumber = searchParams.get(&apos;phone&apos;);
 //   const router = useRouter();
 
 //   const [form, setForm] = useState(null);
@@ -34,7 +34,7 @@
 //     async function loadData() {
 //       try {
 //         if (!formId) {
-//           toast.error('Feedback form not specified');
+//           toast.error(&apos;Feedback form not specified&apos;);
 //           return;
 //         }
 
@@ -47,8 +47,8 @@
 //         setForm(response.data.data.form);
 //         setQuestions(response.data.data.questions);
 //       } catch (error) {
-//         console.error('Error loading feedback form', error);
-//         toast.error('Failed to load feedback form');
+//         console.error(&apos;Error loading feedback form&apos;, error);
+//         toast.error(&apos;Failed to load feedback form&apos;);
 //       } finally {
 //         setLoading(false);
 //       }
@@ -69,7 +69,7 @@
 
 //     // Check if current question is required and has an answer
 //     if (currentQuestion.required && !answers[currentQuestion._id]) {
-//       toast.error('Please answer this question to continue');
+//       toast.error(&apos;Please answer this question to continue&apos;);
 //       return;
 //     }
 
@@ -99,14 +99,14 @@
 
 //       setFeedbackId(response.data.data.responseId);
 //       setCompleted(true);
-//       toast.success('Thank you for your feedback!');
+//       toast.success(&apos;Thank you for your feedback!&apos;);
 
 //       if (onComplete) {
 //         onComplete(response.data.data);
 //       }
 //     } catch (error) {
-//       console.error('Error submitting feedback', error);
-//       toast.error('Failed to submit feedback. Please try again.');
+//       console.error(&apos;Error submitting feedback&apos;, error);
+//       toast.error(&apos;Failed to submit feedback. Please try again.&apos;);
 //       setSubmitting(false);
 //     }
 //   };
@@ -168,7 +168,7 @@
 
 //       <CardContent>
 //         <div className="py-4">
-//           {currentQuestion.type === 'rating' && (
+//           {currentQuestion.type === &apos;rating&apos; && (
 //             <RatingQuestion
 //               question={currentQuestion}
 //               value={answers[currentQuestion._id]}
@@ -176,7 +176,7 @@
 //             />
 //           )}
 
-//           {currentQuestion.type === 'text' && (
+//           {currentQuestion.type === &apos;text&apos; && (
 //             <TextQuestion
 //               question={currentQuestion}
 //               value={answers[currentQuestion._id]}
@@ -184,7 +184,7 @@
 //             />
 //           )}
 
-//           {currentQuestion.type === 'multiplechoice' && (
+//           {currentQuestion.type === &apos;multiplechoice&apos; && (
 //             <MultipleChoiceQuestion
 //               question={currentQuestion}
 //               value={answers[currentQuestion._id]}
@@ -192,7 +192,7 @@
 //             />
 //           )}
 
-//           {currentQuestion.type === 'checkbox' && (
+//           {currentQuestion.type === &apos;checkbox&apos; && (
 //             <CheckboxQuestion
 //               question={currentQuestion}
 //               value={answers[currentQuestion._id] || []}
@@ -200,7 +200,7 @@
 //             />
 //           )}
 
-//           {currentQuestion.type === 'dropdown' && (
+//           {currentQuestion.type === &apos;dropdown&apos; && (
 //             <DropdownQuestion
 //               question={currentQuestion}
 //               value={answers[currentQuestion._id]}
@@ -223,7 +223,7 @@
 //           onClick={handleNext}
 //           disabled={submitting}
 //         >
-//           {submitting ? 'Submitting...' : currentStep < questions.length - 1 ? 'Next' : 'Submit'}
+//           {submitting ? &apos;Submitting...&apos; : currentStep < questions.length - 1 ? &apos;Next&apos; : &apos;Submit&apos;}
 //         </Button>
 //       </CardFooter>
 //     </Card>

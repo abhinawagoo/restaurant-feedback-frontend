@@ -94,7 +94,7 @@ export default function QRCodeManagementPage() {
 
   const handleCreateTable = async (data) => {
     try {
-      setLoading(true); // Add a loading state if you haven't already
+      setLoading(true); // Add a loading state if you haven&apos;t already
 
       // Get restaurant ID from state or context
       const restaurantId = user.restaurantId; // Adjust according to your app structure

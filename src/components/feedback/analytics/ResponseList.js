@@ -1,5 +1,5 @@
 // src/components/feedback/analytics/ResponseList.js
-import React, { useState } from 'react';
+import React, { useState } from &apos;react&apos;;
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,28 +30,28 @@ import {
 } from "lucide-react";
 
 export default function ResponseList ({ responses, onViewDetail }){
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('date');
-  const [sortOrder, setSortOrder] = useState('desc');
+  const [searchTerm, setSearchTerm] = useState(&apos;&apos;);
+  const [sortBy, setSortBy] = useState(&apos;date&apos;);
+  const [sortOrder, setSortOrder] = useState(&apos;desc&apos;);
 
   // Function to get visible text response for preview
   const getTextPreview = (response) => {
     const textAnswers = response.answers.filter(answer => 
-      answer.type === 'text' && answer.value && answer.value.trim().length > 0
+      answer.type === &apos;text&apos; && answer.value && answer.value.trim().length > 0
     );
     
     if (textAnswers.length === 0) return null;
     
     // Get the first non-empty text answer
     return textAnswers[0].value.length > 100 
-      ? textAnswers[0].value.substring(0, 100) + '...' 
+      ? textAnswers[0].value.substring(0, 100) + &apos;...&apos; 
       : textAnswers[0].value;
   };
 
   // Function to get average rating from response
   const getAverageRating = (response) => {
     const ratingAnswers = response.answers.filter(answer => 
-      answer.type === 'rating' && !isNaN(Number(answer.value))
+      answer.type === &apos;rating&apos; && !isNaN(Number(answer.value))
     );
     
     if (ratingAnswers.length === 0) return null;
@@ -64,11 +64,11 @@ export default function ResponseList ({ responses, onViewDetail }){
   const handleSort = (field) => {
     if (sortBy === field) {
       // Toggle order if same field
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === &apos;asc&apos; ? &apos;desc&apos; : &apos;asc&apos;);
     } else {
       // New field, default to desc
       setSortBy(field);
-      setSortOrder('desc');
+      setSortOrder(&apos;desc&apos;);
     }
   };
 
@@ -78,7 +78,7 @@ export default function ResponseList ({ responses, onViewDetail }){
     if (!searchTerm) return true;
     
     // Search in all text answers
-    const textAnswers = response.answers.filter(a => a.type === 'text');
+    const textAnswers = response.answers.filter(a => a.type === &apos;text&apos;);
     const textMatches = textAnswers.some(a => 
       a.value && a.value.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -92,14 +92,14 @@ export default function ResponseList ({ responses, onViewDetail }){
     return textMatches || customerMatch;
   })
   .sort((a, b) => {
-    const aVal = sortBy === 'date' ? new Date(a.createdAt).getTime() :
-                sortBy === 'rating' ? (getAverageRating(a) || 0) :
+    const aVal = sortBy === &apos;date&apos; ? new Date(a.createdAt).getTime() :
+                sortBy === &apos;rating&apos; ? (getAverageRating(a) || 0) :
                 a[sortBy];
-    const bVal = sortBy === 'date' ? new Date(b.createdAt).getTime() :
-                sortBy === 'rating' ? (getAverageRating(b) || 0) :
+    const bVal = sortBy === &apos;date&apos; ? new Date(b.createdAt).getTime() :
+                sortBy === &apos;rating&apos; ? (getAverageRating(b) || 0) :
                 b[sortBy];
                 
-    return sortOrder === 'asc' ? aVal - bVal : bVal - aVal;
+    return sortOrder === &apos;asc&apos; ? aVal - bVal : bVal - aVal;
   });
 
   return (
@@ -133,11 +133,11 @@ export default function ResponseList ({ responses, onViewDetail }){
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => handleSort('date')}>
-                  Sort by Date {sortBy === 'date' && (sortOrder === 'asc' ? '↑' : '↓')}
+                <DropdownMenuItem onClick={() => handleSort(&apos;date&apos;)}>
+                  Sort by Date {sortBy === &apos;date&apos; && (sortOrder === &apos;asc&apos; ? &apos;↑&apos; : &apos;↓&apos;)}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleSort('rating')}>
-                  Sort by Rating {sortBy === 'rating' && (sortOrder === 'asc' ? '↑' : '↓')}
+                <DropdownMenuItem onClick={() => handleSort(&apos;rating&apos;)}>
+                  Sort by Rating {sortBy === &apos;rating&apos; && (sortOrder === &apos;asc&apos; ? &apos;↑&apos; : &apos;↓&apos;)}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -188,7 +188,7 @@ export default function ResponseList ({ responses, onViewDetail }){
                         <TableCell>
                           {response.customer ? (
                             <div className="text-sm">
-                              <div className="font-medium">{response.customer.name || 'Anonymous'}</div>
+                              <div className="font-medium">{response.customer.name || &apos;Anonymous&apos;}</div>
                               {response.customer.email && (
                                 <div className="text-xs text-gray-500">{response.customer.email}</div>
                               )}

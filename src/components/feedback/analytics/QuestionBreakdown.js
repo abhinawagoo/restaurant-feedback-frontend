@@ -1,12 +1,12 @@
 // src/components/feedback/analytics/QuestionBreakdown.js
-import React, { useState } from 'react';
+import React, { useState } from &apos;react&apos;;
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, AlertTriangle, BarChart3 } from "lucide-react";
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell } from 'recharts';
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell } from &apos;recharts&apos;;
 
 const QuestionBreakdown = ({ questions, analytics, onViewDetail }) => {
   const [expandedQuestionId, setExpandedQuestionId] = useState(null);
@@ -27,13 +27,13 @@ const QuestionBreakdown = ({ questions, analytics, onViewDetail }) => {
     }
     
     switch (question.type) {
-      case 'rating':
+      case &apos;rating&apos;:
         return renderRatingVisualization(questionAnalytics.data);
-      case 'multiplechoice':
-      case 'checkbox':
-      case 'dropdown':
+      case &apos;multiplechoice&apos;:
+      case &apos;checkbox&apos;:
+      case &apos;dropdown&apos;:
         return renderChoiceVisualization(questionAnalytics.data, question.options);
-      case 'text':
+      case &apos;text&apos;:
         return renderTextResponses(questionAnalytics.data);
       default:
         return <div className="text-gray-500 text-center py-6">Visualization not available for this question type</div>;
@@ -51,7 +51,7 @@ const QuestionBreakdown = ({ questions, analytics, onViewDetail }) => {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between text-sm">
-          <div className="font-medium">Average Rating: <span className="font-bold">{data.average?.toFixed(1) || 'N/A'}</span></div>
+          <div className="font-medium">Average Rating: <span className="font-bold">{data.average?.toFixed(1) || &apos;N/A&apos;}</span></div>
           <div className="text-gray-500">{data.total || 0} responses</div>
         </div>
         

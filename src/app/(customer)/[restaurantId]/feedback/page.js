@@ -89,7 +89,7 @@ export default function CustomerFeedbackPage() {
 
   const handleSignIn = () => {
     // Store current location and redirect to auth
-    // For now, we'll just hide the auth prompt and continue as guest
+    // For now, we&apos;ll just hide the auth prompt and continue as guest
     setShowAuthOption(false);
     toast.info(
       "Continuing as guest. Sign-in functionality will be available in a future update."
@@ -168,7 +168,7 @@ export default function CustomerFeedbackPage() {
             <CardHeader>
               <CardTitle>Feedback Not Available</CardTitle>
               <CardDescription>
-                Sorry, we couldn't find a feedback form for this restaurant.
+                Sorry, we couldn&apos;t find a feedback form for this restaurant.
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">

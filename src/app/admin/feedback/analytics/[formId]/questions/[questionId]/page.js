@@ -27,7 +27,7 @@ import {
   CartesianGrid, 
   Tooltip, 
   Legend 
-} from 'recharts';
+} from &apos;recharts&apos;;
 
 export default function QuestionAnalysisPage() {
   const params = useParams();
@@ -36,7 +36,7 @@ export default function QuestionAnalysisPage() {
   const [question, setQuestion] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [responses, setResponses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(&apos;&apos;);
   const { formId, questionId } = params;
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function QuestionAnalysisPage() {
     if (!searchTerm) return true;
     
     // Search in response text (for text questions)
-    if (response.value && typeof response.value === 'string') {
+    if (response.value && typeof response.value === &apos;string&apos;) {
       return response.value.toLowerCase().includes(searchTerm.toLowerCase());
     }
     
@@ -94,13 +94,13 @@ export default function QuestionAnalysisPage() {
     }
     
     switch (question.type) {
-      case 'rating':
+      case &apos;rating&apos;:
         return renderRatingVisualization();
-      case 'multiplechoice':
-      case 'checkbox':
-      case 'dropdown':
+      case &apos;multiplechoice&apos;:
+      case &apos;checkbox&apos;:
+      case &apos;dropdown&apos;:
         return renderChoiceVisualization();
-      case 'text':
+      case &apos;text&apos;:
         return renderTextAnalysis();
       default:
         return <div className="text-center py-8 text-gray-500">Visualization not available for this question type</div>;
@@ -118,7 +118,7 @@ export default function QuestionAnalysisPage() {
       percentage: (count / data.total) * 100
     })).sort((a, b) => a.rating - b.rating);
     
-    const COLORS = ['#FF8042', '#FFBB28', '#00C49F', '#0088FE', '#8884d8'];
+    const COLORS = [&apos;#FF8042&apos;, &apos;#FFBB28&apos;, &apos;#00C49F&apos;, &apos;#0088FE&apos;, &apos;#8884d8&apos;];
     
     return (
       <div className="space-y-8">
@@ -126,15 +126,15 @@ export default function QuestionAnalysisPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-sm text-gray-500 mb-1">Average Rating</div>
-              <div className="text-4xl font-bold">{data.average?.toFixed(1) || 'N/A'}</div>
+              <div className="text-4xl font-bold">{data.average?.toFixed(1) || &apos;N/A&apos;}</div>
               <div className="flex items-center mt-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg
                     key={star}
                     className={`w-5 h-5 ${
                       star <= Math.round(data.average || 0)
-                        ? 'text-yellow-400'
-                        : 'text-gray-300'
+                        ? &apos;text-yellow-400&apos;
+                        : &apos;text-gray-300&apos;
                     }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -151,7 +151,7 @@ export default function QuestionAnalysisPage() {
               <div className="text-sm text-gray-500 mb-1">Total Responses</div>
               <div className="text-4xl font-bold">{data.total || 0}</div>
               <div className="text-sm text-gray-500 mt-2">
-                From {analytics.firstResponseDate || 'N/A'} to {analytics.lastResponseDate || 'N/A'}
+                From {analytics.firstResponseDate || &apos;N/A&apos;} to {analytics.lastResponseDate || &apos;N/A&apos;}
               </div>
             </CardContent>
           </Card>
@@ -159,7 +159,7 @@ export default function QuestionAnalysisPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-sm text-gray-500 mb-1">Most Common Rating</div>
-              <div className="text-4xl font-bold">{data.mode || 'N/A'}</div>
+              <div className="text-4xl font-bold">{data.mode || &apos;N/A&apos;}</div>
               <div className="text-sm text-gray-500 mt-2">
                 Given by {data.distribution && data.distribution[data.mode] || 0} respondents
               </div>
@@ -186,7 +186,7 @@ export default function QuestionAnalysisPage() {
                     <XAxis dataKey="rating" />
                     <YAxis />
                     <Tooltip 
-                      formatter={(value, name) => [value, 'Count']}
+                      formatter={(value, name) => [value, &apos;Count&apos;]}
                       labelFormatter={(label) => `Rating: ${label}`}
                     />
                     <Bar dataKey="count" name="Responses" radius={[4, 4, 0, 0]}>
@@ -218,7 +218,7 @@ export default function QuestionAnalysisPage() {
                     <XAxis dataKey="date" />
                     <YAxis domain={[0, 5]} />
                     <Tooltip 
-                      formatter={(value) => [value.toFixed(1), 'Average Rating']}
+                      formatter={(value) => [value.toFixed(1), &apos;Average Rating&apos;]}
                     />
                     <Line
                       type="monotone"
@@ -253,7 +253,7 @@ export default function QuestionAnalysisPage() {
       percentage: (count / data.total) * 100
     })).sort((a, b) => b.count - a.count);
     
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#83a6ed', '#8dd1e1', '#a4de6c'];
+    const COLORS = [&apos;#0088FE&apos;, &apos;#00C49F&apos;, &apos;#FFBB28&apos;, &apos;#FF8042&apos;, &apos;#8884d8&apos;, &apos;#83a6ed&apos;, &apos;#8dd1e1&apos;, &apos;#a4de6c&apos;];
     
     // Active shape for pie chart
     const renderActiveShape = (props) => {
@@ -267,7 +267,7 @@ export default function QuestionAnalysisPage() {
       const my = cy + (outerRadius + 30) * sin;
       const ex = mx + (cos >= 0 ? 1 : -1) * 22;
       const ey = my;
-      const textAnchor = cos >= 0 ? 'start' : 'end';
+      const textAnchor = cos >= 0 ? &apos;start&apos; : &apos;end&apos;;
     
       return (
         <g>
@@ -314,7 +314,7 @@ export default function QuestionAnalysisPage() {
               <div className="text-sm text-gray-500 mb-1">Total Responses</div>
               <div className="text-4xl font-bold">{data.total || 0}</div>
               <div className="text-sm text-gray-500 mt-2">
-                From {analytics.firstResponseDate || 'N/A'} to {analytics.lastResponseDate || 'N/A'}
+                From {analytics.firstResponseDate || &apos;N/A&apos;} to {analytics.lastResponseDate || &apos;N/A&apos;}
               </div>
             </CardContent>
           </Card>
@@ -322,7 +322,7 @@ export default function QuestionAnalysisPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-sm text-gray-500 mb-1">Most Popular Choice</div>
-              <div className="text-2xl font-bold truncate">{chartData[0]?.option || 'N/A'}</div>
+              <div className="text-2xl font-bold truncate">{chartData[0]?.option || &apos;N/A&apos;}</div>
               <div className="text-sm text-gray-500 mt-2">
                 Selected by {chartData[0]?.count || 0} respondents ({chartData[0]?.percentage.toFixed(1) || 0}%)
               </div>
@@ -332,7 +332,7 @@ export default function QuestionAnalysisPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-sm text-gray-500 mb-1">Least Popular Choice</div>
-              <div className="text-2xl font-bold truncate">{chartData[chartData.length - 1]?.option || 'N/A'}</div>
+              <div className="text-2xl font-bold truncate">{chartData[chartData.length - 1]?.option || &apos;N/A&apos;}</div>
               <div className="text-sm text-gray-500 mt-2">
                 Selected by {chartData[chartData.length - 1]?.count || 0} respondents ({chartData[chartData.length - 1]?.percentage.toFixed(1) || 0}%)
               </div>
@@ -431,7 +431,7 @@ export default function QuestionAnalysisPage() {
               <div className="text-sm text-gray-500 mb-1">Total Responses</div>
               <div className="text-4xl font-bold">{data.total || 0}</div>
               <div className="text-sm text-gray-500 mt-2">
-                From {analytics.firstResponseDate || 'N/A'} to {analytics.lastResponseDate || 'N/A'}
+                From {analytics.firstResponseDate || &apos;N/A&apos;} to {analytics.lastResponseDate || &apos;N/A&apos;}
               </div>
             </CardContent>
           </Card>
@@ -514,13 +514,13 @@ export default function QuestionAnalysisPage() {
                   <div className="flex flex-col">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1">
-                        {question.type === 'rating' ? (
+                        {question.type === &apos;rating&apos; ? (
                           <div className="flex items-center mb-2">
                             {[...Array(5)].map((_, i) => (
                               <svg
                                 key={i}
                                 className={`w-5 h-5 ${
-                                  i < response.value ? 'text-yellow-400' : 'text-gray-300'
+                                  i < response.value ? &apos;text-yellow-400&apos; : &apos;text-gray-300&apos;
                                 }`}
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -532,17 +532,17 @@ export default function QuestionAnalysisPage() {
                           </div>
                         ) : (
                           <p className="text-lg font-medium break-words">
-                            {typeof response.value === 'string' ? response.value : JSON.stringify(response.value)}
+                            {typeof response.value === &apos;string&apos; ? response.value : JSON.stringify(response.value)}
                           </p>
                         )}
                         
                         {response.customer && (
                           <div className="flex items-center">
                             <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-medium mr-2">
-                              {response.customer.name ? response.customer.name.charAt(0).toUpperCase() : 'A'}
+                              {response.customer.name ? response.customer.name.charAt(0).toUpperCase() : &apos;A&apos;}
                             </div>
                             <div>
-                              <p className="font-medium">{response.customer.name || 'Anonymous'}</p>
+                              <p className="font-medium">{response.customer.name || &apos;Anonymous&apos;}</p>
                               {response.customer.email && (
                                 <p className="text-sm text-gray-500">{response.customer.email}</p>
                               )}
@@ -711,7 +711,7 @@ export default function QuestionAnalysisPage() {
                     strokeWidth={2}
                     activeDot={{ r: 8 }}
                   />
-                  {question.type === 'rating' && (
+                  {question.type === &apos;rating&apos; && (
                     <Line
                       type="monotone"
                       dataKey="average"

@@ -147,7 +147,7 @@ export default function CustomerAuthForm({
         </Button>
       </CardContent>
       <CardFooter className="text-center text-sm text-gray-500">
-        <p>We'll only use your information to improve your experience</p>
+        <p>We&apos;ll only use your information to improve your experience</p>
       </CardFooter>
     </Card>
   );
