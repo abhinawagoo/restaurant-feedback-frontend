@@ -22,168 +22,8 @@ import {
   MessageSquare,
   ArrowLeft,
 } from "lucide-react";
-import { restaurantService } from "@/lib/api";
+import { restaurantService, menuService } from "@/lib/api";
 import { toast } from "sonner";
-
-// Mock menu data for the MVP
-const mockMenuCategories = [
-  { id: 1, name: "Appetizers" },
-  { id: 2, name: "Main Courses" },
-  { id: 3, name: "Pizzas" },
-  { id: 4, name: "Pastas" },
-  { id: 5, name: "Desserts" },
-  { id: 6, name: "Drinks" },
-];
-
-const mockMenuItems = [
-  {
-    id: 1,
-    name: "Garlic Bread",
-    description: "Freshly baked bread with garlic butter",
-    price: 4.99,
-    categoryId: 1,
-    popular: true,
-    dietary: ["Vegetarian"],
-  },
-  {
-    id: 2,
-    name: "Chicken Wings",
-    description: "Spicy buffalo wings with blue cheese dip",
-    price: 8.99,
-    categoryId: 1,
-    dietary: ["Spicy"],
-  },
-  {
-    id: 3,
-    name: "Mozzarella Sticks",
-    description: "Breaded and fried mozzarella with marinara sauce",
-    price: 6.99,
-    categoryId: 1,
-    dietary: ["Vegetarian"],
-  },
-
-  {
-    id: 4,
-    name: "Grilled Salmon",
-    description: "Fresh salmon with lemon butter sauce and seasonal vegetables",
-    price: 18.99,
-    categoryId: 2,
-  },
-  {
-    id: 5,
-    name: "Ribeye Steak",
-    description: "10oz ribeye with mashed potatoes and grilled asparagus",
-    price: 24.99,
-    categoryId: 2,
-    popular: true,
-  },
-  {
-    id: 6,
-    name: "Chicken Parmesan",
-    description:
-      "Breaded chicken topped with marinara and mozzarella, served with spaghetti",
-    price: 16.99,
-    categoryId: 2,
-  },
-
-  {
-    id: 7,
-    name: "Margherita Pizza",
-    description: "Classic tomato sauce, fresh mozzarella, and basil",
-    price: 12.99,
-    categoryId: 3,
-    dietary: ["Vegetarian"],
-    popular: true,
-  },
-  {
-    id: 8,
-    name: "Pepperoni Pizza",
-    description: "Tomato sauce, mozzarella, and pepperoni",
-    price: 14.99,
-    categoryId: 3,
-  },
-  {
-    id: 9,
-    name: "Vegetarian Pizza",
-    description:
-      "Tomato sauce, mozzarella, bell peppers, onions, and mushrooms",
-    price: 13.99,
-    categoryId: 3,
-    dietary: ["Vegetarian"],
-  },
-
-  {
-    id: 10,
-    name: "Spaghetti Bolognese",
-    description: "Spaghetti with hearty meat sauce",
-    price: 14.99,
-    categoryId: 4,
-  },
-  {
-    id: 11,
-    name: "Fettuccine Alfredo",
-    description: "Fettuccine pasta in a creamy parmesan sauce",
-    price: 13.99,
-    categoryId: 4,
-    dietary: ["Vegetarian"],
-  },
-  {
-    id: 12,
-    name: "Shrimp Scampi",
-    description: "Linguine with garlic butter shrimp",
-    price: 17.99,
-    categoryId: 4,
-    popular: true,
-  },
-
-  {
-    id: 13,
-    name: "Tiramisu",
-    description: "Classic Italian coffee-flavored dessert",
-    price: 6.99,
-    categoryId: 5,
-  },
-  {
-    id: 14,
-    name: "Chocolate Lava Cake",
-    description:
-      "Warm chocolate cake with a molten center, served with vanilla ice cream",
-    price: 7.99,
-    categoryId: 5,
-    popular: true,
-    dietary: ["Vegetarian"],
-  },
-  {
-    id: 15,
-    name: "New York Cheesecake",
-    description: "Creamy cheesecake with a graham cracker crust",
-    price: 6.99,
-    categoryId: 5,
-    dietary: ["Vegetarian"],
-  },
-
-  {
-    id: 16,
-    name: "Soft Drinks",
-    description: "Coke, Diet Coke, Sprite, or Fanta",
-    price: 2.99,
-    categoryId: 6,
-  },
-  {
-    id: 17,
-    name: "Iced Tea",
-    description: "Sweetened or unsweetened",
-    price: 2.99,
-    categoryId: 6,
-  },
-  {
-    id: 18,
-    name: "Espresso",
-    description: "Double shot of espresso",
-    price: 3.49,
-    categoryId: 6,
-  },
-];
 
 export default function RestaurantMenuPage() {
   const [restaurant, setRestaurant] = useState(null);
@@ -191,6 +31,10 @@ export default function RestaurantMenuPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedItems, setSelectedItems] = useState([]);
   const [showSelected, setShowSelected] = useState(false);
+
+  const [menuItems, setMenuItems] = useState([]);
+  const [menuCategories, setMenuCategories] = useState([]);
+  const [error, setError] = useState(null);
 
   const params = useParams();
   const searchParams = useSearchParams();
@@ -200,32 +44,64 @@ export default function RestaurantMenuPage() {
   const tableId = searchParams.get("table");
 
   useEffect(() => {
-    async function loadRestaurant() {
-      if (!restaurantId) return;
-
+    const fetchMenuData = async () => {
       try {
-        const response = await restaurantService.getRestaurantPublic(
-          restaurantId
-        );
-        setRestaurant(response.data.data);
-      } catch (error) {
-        console.error("Error loading restaurant", error);
-        toast.error("Could not load restaurant information");
+        setLoading(true);
+        
+        // Use the menuService instead of restaurantService
+        const [itemsResponse, categoriesResponse] = await Promise.all([
+          menuService.getPublicMenuItems(restaurantId),
+          menuService.getPublicMenuCategories(restaurantId),
+        ]);
+        
+        // Log the full response to debug the structure
+        console.log("API Response - Items:", itemsResponse);
+        console.log("API Response - Categories:", categoriesResponse);
+        
+        // Extract data from the nested structure and filter active items/categories
+        const allCategories = categoriesResponse.data.data || [];
+        const allItems = itemsResponse.data.data || [];
+        
+        // Filter only active categories
+        const activeCategories = allCategories.filter(category => category.active);
+        
+        // Filter only active items 
+        const activeItems = allItems.filter(item => item.active);
+        
+        console.log("Active Categories:", activeCategories);
+        console.log("Active Items:", activeItems);
+        
+        setMenuCategories(activeCategories);
+        setMenuItems(activeItems);
+      } catch (err) {
+        console.error("Error fetching menu data:", err);
+        console.error("Full error object:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
+        setError("Failed to fetch menu data. Please try again later.");
+        
+        // Fallback to mock data in case of error
+        setMenuItems(mockMenuItems.map(item => ({
+          ...item,
+          _id: item.id.toString()
+        })));
+        setMenuCategories(mockMenuCategories.map(category => ({
+          ...category,
+          _id: category.id.toString()
+        })));
       } finally {
         setLoading(false);
       }
-    }
+    };
 
-    loadRestaurant();
+    fetchMenuData();
   }, [restaurantId]);
 
   const handleAddItem = (item) => {
-    const existingItem = selectedItems.find((i) => i.id === item.id);
+    const existingItem = selectedItems.find((i) => i._id === item._id);
 
     if (existingItem) {
       setSelectedItems(
         selectedItems.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+          i._id === item._id ? { ...i, quantity: i.quantity + 1 } : i
         )
       );
     } else {
@@ -237,11 +113,11 @@ export default function RestaurantMenuPage() {
 
   const handleUpdateQuantity = (itemId, newQuantity) => {
     if (newQuantity <= 0) {
-      setSelectedItems(selectedItems.filter((item) => item.id !== itemId));
+      setSelectedItems(selectedItems.filter((item) => item._id !== itemId));
     } else {
       setSelectedItems(
         selectedItems.map((item) =>
-          item.id === itemId ? { ...item, quantity: newQuantity } : item
+          item._id === itemId ? { ...item, quantity: newQuantity } : item
         )
       );
     }
@@ -258,14 +134,22 @@ export default function RestaurantMenuPage() {
   };
 
   const getFilteredItems = () => {
-    return activeCategory === "all"
-      ? mockMenuItems
-      : mockMenuItems.filter((item) => {
-          const category = mockMenuCategories.find(
-            (c) => c.id === item.categoryId
-          );
-          return category?.name === activeCategory;
-        });
+    if (activeCategory === "all") {
+      return menuItems;
+    } else {
+      // Find the category with the matching name
+      const category = menuCategories.find(c => c.name === activeCategory);
+      if (!category) return [];
+      
+      // Filter items by category ID (comparing as strings to handle ObjectId)
+      return menuItems.filter(item => {
+        const itemCategoryId = item.categoryId || item.category;
+        const categoryId = category._id;
+        
+        // Convert both to strings to compare reliably
+        return String(itemCategoryId) === String(categoryId);
+      });
+    }
   };
 
   const totalAmount = selectedItems.reduce(
@@ -278,6 +162,26 @@ export default function RestaurantMenuPage() {
       <CustomerLayout>
         <div className="flex justify-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-stone-700"></div>
+        </div>
+      </CustomerLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <CustomerLayout>
+        <div className="max-w-2xl mx-auto py-6 px-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Error</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>{error}</p>
+              <Button className="mt-4" onClick={() => window.location.reload()}>
+                Try Again
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </CustomerLayout>
     );
@@ -327,7 +231,7 @@ export default function RestaurantMenuPage() {
               <div className="space-y-3">
                 {selectedItems.map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className="flex justify-between items-center py-2 border-b last:border-0"
                   >
                     <div>
@@ -342,7 +246,7 @@ export default function RestaurantMenuPage() {
                         size="icon"
                         className="h-8 w-8"
                         onClick={() =>
-                          handleUpdateQuantity(item.id, item.quantity - 1)
+                          handleUpdateQuantity(item._id, item.quantity - 1)
                         }
                       >
                         <Minus className="h-3 w-3" />
@@ -353,7 +257,7 @@ export default function RestaurantMenuPage() {
                         size="icon"
                         className="h-8 w-8"
                         onClick={() =>
-                          handleUpdateQuantity(item.id, item.quantity + 1)
+                          handleUpdateQuantity(item._id, item.quantity + 1)
                         }
                       >
                         <Plus className="h-3 w-3" />
@@ -392,8 +296,8 @@ export default function RestaurantMenuPage() {
             >
               <TabsList className="mb-4 flex flex-wrap h-auto">
                 <TabsTrigger value="all">All</TabsTrigger>
-                {mockMenuCategories.map((category) => (
-                  <TabsTrigger key={category.id} value={category.name}>
+                {menuCategories.map((category) => (
+                  <TabsTrigger key={category._id} value={category.name}>
                     {category.name}
                   </TabsTrigger>
                 ))}
@@ -402,7 +306,7 @@ export default function RestaurantMenuPage() {
               <TabsContent value={activeCategory} className="mt-0">
                 <div className="space-y-4">
                   {getFilteredItems().map((item) => (
-                    <div key={item.id} className="border rounded-lg p-4">
+                    <div key={item._id} className="border rounded-lg p-4">
                       <div className="flex justify-between">
                         <div>
                           <div className="flex items-center">
@@ -464,3 +368,41 @@ export default function RestaurantMenuPage() {
     </CustomerLayout>
   );
 }
+
+// Define mock data for fallback or development
+const mockMenuCategories = [
+  { id: 1, name: "Appetizers" },
+  { id: 2, name: "Main Courses" },
+  { id: 3, name: "Pizzas" },
+  { id: 4, name: "Pastas" },
+  { id: 5, name: "Desserts" },
+  { id: 6, name: "Drinks" },
+];
+
+const mockMenuItems = [
+  {
+    id: 1,
+    name: "Garlic Bread",
+    description: "Freshly baked bread with garlic butter",
+    price: 4.99,
+    categoryId: 1,
+    popular: true,
+    dietary: ["Vegetarian"],
+  },
+  {
+    id: 2,
+    name: "Chicken Wings",
+    description: "Spicy buffalo wings with blue cheese dip",
+    price: 8.99,
+    categoryId: 1,
+    dietary: ["Spicy"],
+  },
+  // ... other items
+  {
+    id: 18,
+    name: "Espresso",
+    description: "Double shot of espresso",
+    price: 3.49,
+    categoryId: 6,
+  },
+];

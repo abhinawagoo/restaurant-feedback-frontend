@@ -144,6 +144,11 @@ export const feedbackService = {
     return await api.post(`/feedback/forms/${formId}/questions`, data);
   },
 
+  // update a question in a form 
+  updateQuestion: async (formId, questionId, questionData) => {
+    return await api.put(`feedback/forms/${formId}/questions/${questionId}`, questionData);
+  },
+
   // Submit feedback
   submitFeedback: async (formId, data) => {
     return await api.post(`/feedback/forms/${formId}/submit`, data);
@@ -155,6 +160,79 @@ export const feedbackService = {
       params,
     });
   },
+
+
+
+
+  //get feedback analytics
+
+  getFormAnalytics: async (formId) => {
+    return await api.get(`/analytics/forms/${formId}/analytics`);
+  },
+  // Get all responses for a form
+  getFormResponses: async (formId, params = {}) => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
+    if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder);
+    
+    const queryString = queryParams.toString();
+    return await api.get(`/analytics/forms/${formId}/responses${queryString ? `?${queryString}` : ''}`);
+  },
+  
+  // Get a single question
+  getQuestion: async (questionId) => {
+    return await api.get(`/analytics/questions/${questionId}`);
+  },
+  
+  // Get analytics for a specific question
+  getQuestionAnalytics: async (questionId) => {
+    return await api.get(`/analytics/questions/${questionId}/analytics`);
+  },
+  // Get responses for a specific question
+  getQuestionResponses: async (questionId, params = {}) => {
+    const queryParams = new URLSearchParams();
+    
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
+    if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder);
+    
+    const queryString = queryParams.toString();
+    return await api.get(`/analytics/questions/${questionId}/responses${queryString ? `?${queryString}` : ''}`);
+  },
+  
+  // Get a single feedback response
+  getFeedbackResponse: async (responseId) => {
+    return await api.get(`/analytics/responses/${responseId}`);
+  },
+  
+  // Update a question
+  updateQuestion: async (formId, questionId, data) => {
+    return await api.put(`/analytics/forms/${formId}/questions/${questionId}`, data);
+  },
+  
+  // Delete a question
+  deleteQuestion: async (formId, questionId) => {
+    return await api.delete(`/analytics/forms/${formId}/questions/${questionId}`);
+  },
+  
+  // Export form data (all responses)
+  exportFormData: async (formId, format = 'csv') => {
+    return await api.get(`/analytics/forms/${formId}/export?format=${format}`, {
+      responseType: 'blob'
+    });
+  },
+
+  // Export question data
+  exportQuestionData: async (questionId, format = 'csv') => {
+    return await api.get(`/analytics/questions/${questionId}/export?format=${format}`, {
+      responseType: 'blob'
+    });
+  },
+
 };
 
 // Create the API services for menu management

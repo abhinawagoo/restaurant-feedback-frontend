@@ -96,7 +96,7 @@ export default function FeedbackFormList({ onCreateNew }) {
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button variant="outline" asChild>
-              <Link href={`/admin/feedback/forms/${form._id}`}>
+              <Link href={`/admin/feedback/analytics/${form._id}`}>
                 <MessageSquare className="h-4 w-4 mr-2" />
                 View Responses
               </Link>

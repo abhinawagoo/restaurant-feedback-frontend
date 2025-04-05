@@ -299,7 +299,6 @@ export default function MenuManagementPage() {
   };
 
   // Handle updating a category
-  // Handle updating a category
   const handleUpdateCategory = async (updatedCategory) => {
     try {
       const response = await menuService.updateCategory(updatedCategory._id, {
@@ -571,7 +570,7 @@ export default function MenuManagementPage() {
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     onClick={() =>
-                                      handleToggleItemAvailability(item.id)
+                                      handleToggleItemAvailability(item._id)
                                     }
                                   >
                                     {item.active ? (
@@ -589,7 +588,7 @@ export default function MenuManagementPage() {
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem
                                     className="text-red-600"
-                                    onClick={() => handleDeleteItem(item.id)}
+                                    onClick={() => handleDeleteItem(item._id)}
                                   >
                                     <Trash className="h-4 w-4 mr-2" /> Delete
                                     Item
@@ -699,7 +698,7 @@ export default function MenuManagementPage() {
                                 <DropdownMenuItem
                                   className="text-red-600"
                                   onClick={() =>
-                                    handleDeleteCategory(category.id)
+                                    handleDeleteCategory(category._id)
                                   }
                                 >
                                   <Trash className="h-4 w-4 mr-2" /> Delete
