@@ -30,7 +30,7 @@ export default function AdminDashboard() {
 
       try {
         // In a real app, you would fetch actual stats from the backend
-        // For now, we&apos;ll use mock data
+        // For now, we'll use mock data
         const response = await feedbackService.getFeedbackResponses(
           user.restaurantId
         );
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
             Welcome, {user?.name || "Admin"}
           </h1>
           <p className="text-gray-500">
-            Here&apos;s an overview of your restaurant&apos;s feedback
+            Here's an overview of your restaurant's feedback
           </p>
         </div>
 

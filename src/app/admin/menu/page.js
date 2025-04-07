@@ -420,7 +420,7 @@ export default function MenuManagementPage() {
           <div>
             <h1 className="text-3xl font-bold mb-2">Menu Management</h1>
             <p className="text-gray-500">
-              Manage your restaurant&apos;s menu items and categories
+              Manage your restaurant's menu items and categories
             </p>
           </div>
         </div>

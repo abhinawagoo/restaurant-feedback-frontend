@@ -7,10 +7,10 @@ export default function GoogleReviewButton({ restaurantId, feedbackId }) {
   const handleGoogleReview = () => {
     // In a real app, you would:
     // 1. Generate a pre-filled review text based on the feedback
-    // 2. Open Google Maps to the restaurant&apos;s page with the pre-filled review
+    // 2. Open Google Maps to the restaurant's page with the pre-filled review
     // 3. Track the conversion in your backend
 
-    // For demo purposes, we&apos;ll just open a new window
+    // For demo purposes, we'll just open a new window
     window.open("https://www.google.com/maps?cid=123456789", "_blank");
   };
 

@@ -39,7 +39,7 @@ export default function GoogleReviewSummary({
       console.log(feedbackData);
 
       // In a real app, this would call the OpenAI API
-      // For this demo, we&apos;ll generate a simple review based on the ratings
+      // For this demo, we'll generate a simple review based on the ratings
 
       // Extract ratings
       const ratingQuestions = questions.filter((q) => q.type === "rating");
@@ -106,7 +106,7 @@ export default function GoogleReviewSummary({
           reviewText += `${specificDetails.answer} `;
         }
 
-        reviewText += `It&apos;s worth a visit if you&apos;re in the area.`;
+        reviewText += `It's worth a visit if you're in the area.`;
       } else {
         reviewText = `My experience at ${restaurantName} was below expectations. `;
 

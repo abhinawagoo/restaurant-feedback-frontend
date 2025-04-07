@@ -127,7 +127,8 @@ const QuestionBreakdown = ({ questions, analytics, onViewDetail }) => {
         
         {data.otherResponses && data.otherResponses.length > 0 && (
           <div className="mt-4">
-            <h4 className="text-sm font-medium mb-2">"Other" responses</h4>
+            <h4 className="text-sm font-medium mb-2">&quot;Other&quot; responses</h4>
+
             <div className="space-y-2">
               {data.otherResponses.map((response, index) => (
                 <div key={index} className="text-sm p-2 rounded-md bg-gray-50">
