@@ -148,7 +148,7 @@ export default function GeneralSettings({ restaurant }) {
               <CardHeader>
                 <CardTitle>Basic Information</CardTitle>
                 <CardDescription>
-                  Update your restaurant&apos;s basic information
+                  Update your restaurant's basic information
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -236,7 +236,7 @@ export default function GeneralSettings({ restaurant }) {
               <CardHeader>
                 <CardTitle>Restaurant Address</CardTitle>
                 <CardDescription>
-                  Update your restaurant&apos;s physical location
+                  Update your restaurant's physical location
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -322,7 +322,7 @@ export default function GeneralSettings({ restaurant }) {
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>
                 <CardDescription>
-                  Update your restaurant&apos;s contact details and social media
+                  Update your restaurant's contact details and social media
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">

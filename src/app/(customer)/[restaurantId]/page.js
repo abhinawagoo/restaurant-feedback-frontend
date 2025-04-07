@@ -60,7 +60,7 @@ export default function CustomerLandingPage() {
         if (formId) {
           setDefaultFormId(formId);
 
-          // If we&apos;re directed to a specific form, set the tab to feedback
+          // If we're directed to a specific form, set the tab to feedback
           if (formId && !activeTab) {
             setActiveTab("feedback");
           }
@@ -79,7 +79,7 @@ export default function CustomerLandingPage() {
             }
           } catch (formError) {
             console.error("Error loading feedback forms", formError);
-            // Don&apos;t show error - feedback might be optional
+            // Don't show error - feedback might be optional
           }
         }
       } catch (error) {
@@ -231,7 +231,7 @@ export default function CustomerLandingPage() {
               </CardTitle>
               <CardDescription className="text-center">
                 {tableId
-                  ? `You&apos;re at Table ${tableId}`
+                  ? `You're at Table ${tableId}`
                   : "Enter your phone number to continue"}
               </CardDescription>
             </CardHeader>
@@ -260,7 +260,7 @@ export default function CustomerLandingPage() {
                   <p className="text-sm text-red-500">{phoneError}</p>
                 )}
                 <p className="text-xs text-gray-500">
-                  We&apos;ll use this to save your feedback and improve your
+                  We'll use this to save your feedback and improve your
                   experience
                 </p>
               </div>
@@ -321,7 +321,7 @@ export default function CustomerLandingPage() {
             </CardTitle>
             <CardDescription className="text-center">
               {tableId
-                ? `You&apos;re at Table ${tableId}`
+                ? `You're at Table ${tableId}`
                 : "Thank you for visiting"}
               {mobileAuthenticated && phoneNumber && ` | ${phoneNumber}`}
             </CardDescription>
@@ -463,7 +463,7 @@ export default function CustomerLandingPage() {
 //         if (formId) {
 //           setDefaultFormId(formId);
 
-//           // If we&apos;re directed to a specific form, set the tab to feedback
+//           // If we're directed to a specific form, set the tab to feedback
 //           if (formId && !activeTab) {
 //             setActiveTab("feedback");
 //           }
@@ -486,7 +486,7 @@ export default function CustomerLandingPage() {
 //           }
 //         } catch (formError) {
 //           console.error("Error loading feedback forms", formError);
-//           // Don&apos;t show error - feedback might be optional
+//           // Don't show error - feedback might be optional
 //         }
 //       } catch (error) {
 //         console.error("Error loading restaurant", error);
@@ -577,7 +577,7 @@ export default function CustomerLandingPage() {
 //               </CardTitle>
 //               <CardDescription className="text-center">
 //                 {tableId
-//                   ? `You&apos;re at Table ${tableId}`
+//                   ? `You're at Table ${tableId}`
 //                   : "Enhance your experience by signing in"}
 //               </CardDescription>
 //             </CardHeader>
@@ -655,7 +655,7 @@ export default function CustomerLandingPage() {
 //             </CardTitle>
 //             <CardDescription className="text-center">
 //               {tableId
-//                 ? `You&apos;re at Table ${tableId}`
+//                 ? `You're at Table ${tableId}`
 //                 : "Thank you for visiting"}
 //             </CardDescription>
 //           </CardHeader>
