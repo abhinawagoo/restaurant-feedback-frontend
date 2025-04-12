@@ -76,7 +76,20 @@ export default function RegisterForm() {
   };
 
   return (
+
+    <div className="w-full max-w-md px-4 space-y-6">
+
     <div className="mx-auto max-w-md space-y-6 p-6 bg-white rounded-lg shadow-md">
+      {/* Logo Section */}
+      <div className="flex justify-center">
+          <Link href="https://hoshloop.com">
+            <h2 className="text-3xl font-bold text-black hover:opacity-80 transition">
+              Hosh<span className="text-green-500">Loop</span>
+            </h2>
+          </Link>
+        </div>
+  
+        {/* Login Box */}
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Create Account</h1>
         <p className="text-gray-500">Register your restaurant with us</p>
@@ -191,6 +204,7 @@ export default function RegisterForm() {
           </Link>
         </p>
       </div>
+    </div>
     </div>
   );
 }

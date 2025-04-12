@@ -3,15 +3,26 @@
 
 import { createContext, useState, useEffect, useContext } from "react";
 import { authService } from "@/lib/api";
+import { usePathname, useRouter } from "next/navigation";
 
 // Create auth context
 const AuthContext = createContext();
+
+// Define protected routes pattern
+const PROTECTED_ROUTE_PATTERN = /^\/admin/; // All routes starting with /admin
 
 // Auth provider component
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  
+  // Check if current route requires authentication
+  const isProtectedRoute = () => {
+    return PROTECTED_ROUTE_PATTERN.test(pathname);
+  };
 
   // Load user on initial render
   useEffect(() => {
@@ -21,6 +32,10 @@ export function AuthProvider({ children }) {
         const token = localStorage.getItem("token");
 
         if (!token) {
+          // If on a protected route and no token, redirect to login
+          if (isProtectedRoute()) {
+            router.push('/login');
+          }
           setLoading(false);
           return;
         }
@@ -31,13 +46,18 @@ export function AuthProvider({ children }) {
       } catch (err) {
         console.error("Failed to load user", err);
         localStorage.removeItem("token");
+        
+        // If on a protected route and auth failed, redirect to login
+        if (isProtectedRoute()) {
+          router.push('/login');
+        }
       } finally {
         setLoading(false);
       }
     }
 
     loadUser();
-  }, []);
+  }, [pathname, router]);
 
   // Login function
   const login = async (email, password) => {
@@ -83,6 +103,7 @@ export function AuthProvider({ children }) {
     } catch (err) {
       console.error("Logout error", err);
     } finally {
+      localStorage.removeItem("token");
       setLoading(false);
     }
   };
@@ -99,6 +120,7 @@ export function AuthProvider({ children }) {
     register,
     logout,
     isAuthenticated,
+    isProtectedRoute,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
