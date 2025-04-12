@@ -58,66 +58,146 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="mx-auto max-w-md space-y-6 p-6 bg-white rounded-lg shadow-md">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Welcome Back</h1>
-        <p className="text-gray-500">Sign in to your restaurant dashboard</p>
-      </div>
+      <div className="w-full max-w-md px-4 space-y-6">
+        
+        <div className="space-y-6 p-6 bg-white rounded-lg shadow-md">
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="your@email.com"
-                    type="email"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="******"
-                    type="password"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign In"}
-          </Button>
-        </form>
-      </Form>
-
-      <div className="mt-4 text-center text-sm">
-        <p>
-          Don't have an account?{" "}
-          <Link href="/register" className="text-stone-600 hover:underline">
-            Register here
+        {/* Logo Section */}
+        <div className="flex justify-center">
+          <Link href="https://hoshloop.com">
+            <h2 className="text-3xl font-bold text-black hover:opacity-80 transition">
+              Hosh<span className="text-green-500">Loop</span>
+            </h2>
           </Link>
-        </p>
+        </div>
+  
+        {/* Login Box */}
+          <div className="space-y-2 text-center">
+            <h1 className="text-3xl font-bold">Welcome Back</h1>
+            <p className="text-gray-500">Sign in to your restaurant dashboard</p>
+          </div>
+  
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="your@email.com"
+                        type="email"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+  
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="******"
+                        type="password"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+  
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Signing in..." : "Sign In"}
+              </Button>
+            </form>
+          </Form>
+  
+          <div className="mt-4 text-center text-sm">
+            <p>
+              Don't have an account?{" "}
+              <Link href="/register" className="text-stone-600 hover:underline">
+                Register here
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
   );
+  
+
+  // return (
+  //   <div className="mx-auto max-w-md space-y-6 p-6 bg-white rounded-lg shadow-md">
+  //     <div className="space-y-2 text-center">
+  //       <h1 className="text-3xl font-bold">Welcome Back</h1>
+  //       <p className="text-gray-500">Sign in to your restaurant dashboard</p>
+  //     </div>
+
+  //     <Form {...form}>
+  //       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+  //         <FormField
+  //           control={form.control}
+  //           name="email"
+  //           render={({ field }) => (
+  //             <FormItem>
+  //               <FormLabel>Email</FormLabel>
+  //               <FormControl>
+  //                 <Input
+  //                   placeholder="your@email.com"
+  //                   type="email"
+  //                   disabled={isLoading}
+  //                   {...field}
+  //                 />
+  //               </FormControl>
+  //               <FormMessage />
+  //             </FormItem>
+  //           )}
+  //         />
+
+  //         <FormField
+  //           control={form.control}
+  //           name="password"
+  //           render={({ field }) => (
+  //             <FormItem>
+  //               <FormLabel>Password</FormLabel>
+  //               <FormControl>
+  //                 <Input
+  //                   placeholder="******"
+  //                   type="password"
+  //                   disabled={isLoading}
+  //                   {...field}
+  //                 />
+  //               </FormControl>
+  //               <FormMessage />
+  //             </FormItem>
+  //           )}
+  //         />
+
+  //         <Button type="submit" className="w-full" disabled={isLoading}>
+  //           {isLoading ? "Signing in..." : "Sign In"}
+  //         </Button>
+  //       </form>
+  //     </Form>
+
+  //     <div className="mt-4 text-center text-sm">
+  //       <p>
+  //         Don't have an account?{" "}
+  //         <Link href="/register" className="text-stone-600 hover:underline">
+  //           Register here
+  //         </Link>
+  //       </p>
+  //     </div>
+  //   </div>
+  // );
 }
