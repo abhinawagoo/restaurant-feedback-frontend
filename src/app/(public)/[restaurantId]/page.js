@@ -240,17 +240,17 @@ export default function CustomerLandingPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Your phone number</label>
                 <div className="flex space-x-2">
-                <PhoneInput
-        value={phoneNumber}
-        onChange={(val) => {
-          setPhoneNumber(val);
-          setPhoneError("");
-        }}
-        defaultCountry="IN"
-        international
-        placeholder="Phone Number"
-        className={phoneError ? "border-red-500" : ""}
-      />
+                  <PhoneInput
+                    value={phoneNumber}
+                    onChange={(val) => {
+                      setPhoneNumber(val);
+                      setPhoneError("");
+                    }}
+                    defaultCountry="IN"
+                    international
+                    placeholder="Phone Number"
+                    className={phoneError ? "border-red-500" : ""}
+                  />
                   <Button
                     onClick={() => handlePhoneAuth(tableId)}
                     disabled={authenticating}
@@ -275,7 +275,7 @@ export default function CustomerLandingPage() {
                   <span className="bg-white px-2 text-gray-500">Or</span>
                 </div>
               </div>
-{/* 
+              {/* 
               <Button
                 variant="outline"
                 className="w-full"
