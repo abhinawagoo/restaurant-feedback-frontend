@@ -27,15 +27,18 @@ export function AuthProvider({ children }) {
   // Load user on initial render
   useEffect(() => {
     async function loadUser() {
+      // If not a protected route, don't bother with authentication
+      if (!isProtectedRoute()) {
+        setLoading(false);
+        return;
+      }
+      
       try {
-        // Check for token
+        // Check for token only for protected routes
         const token = localStorage.getItem("token");
 
         if (!token) {
-          // If on a protected route and no token, redirect to login
-          if (isProtectedRoute()) {
-            router.push('/login');
-          }
+          router.push('/login');
           setLoading(false);
           return;
         }
@@ -47,10 +50,8 @@ export function AuthProvider({ children }) {
         console.error("Failed to load user", err);
         localStorage.removeItem("token");
         
-        // If on a protected route and auth failed, redirect to login
-        if (isProtectedRoute()) {
-          router.push('/login');
-        }
+        // Only redirect if on a protected route
+        router.push('/login');
       } finally {
         setLoading(false);
       }
@@ -66,6 +67,7 @@ export function AuthProvider({ children }) {
 
     try {
       const data = await authService.login({ email, password });
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       return data;
     } catch (err) {
@@ -83,6 +85,7 @@ export function AuthProvider({ children }) {
 
     try {
       const data = await authService.register(formData);
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       return data;
     } catch (err) {
@@ -99,11 +102,12 @@ export function AuthProvider({ children }) {
 
     try {
       await authService.logout();
+      localStorage.removeItem("token");
       setUser(null);
     } catch (err) {
       console.error("Logout error", err);
-    } finally {
       localStorage.removeItem("token");
+    } finally {
       setLoading(false);
     }
   };

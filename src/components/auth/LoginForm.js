@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import HoshloopAnimation from "@/components/landing/HoshloopAnimation";
 import { toast } from "sonner";
 
 // Form validation schema
@@ -59,6 +60,7 @@ export default function LoginForm() {
 
   return (
       <div className="w-full max-w-md px-4 space-y-6">
+
         
         <div className="space-y-6 p-6 bg-white rounded-lg shadow-md">
 
@@ -71,6 +73,8 @@ export default function LoginForm() {
             </h2>
           </Link>
         </div>
+
+        <HoshloopAnimation />
   
         {/* Login Box */}
           <div className="space-y-2 text-center">

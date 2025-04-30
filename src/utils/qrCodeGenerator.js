@@ -26,7 +26,7 @@ export const generateTableQRUrl = (
   tableId,
   formId = null
 ) => {
-  let url = `${baseUrl}/${restaurantId}?table=${tableId}`;
+  let url = `${baseUrl}/customer/${restaurantId}?table=${tableId}`;
 
   // If a specific feedback form is provided, add it to the URL
   if (formId) {
