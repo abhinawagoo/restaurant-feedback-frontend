@@ -94,7 +94,7 @@ export default function LoginForm() {
                       <Input
                         placeholder="your@email.com"
                         type="email"
-                        disabled={isLoading}
+                        disabled={isLoading}     
                         {...field}
                       />
                     </FormControl>
