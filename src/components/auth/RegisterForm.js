@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+// import HoshloopAnimation from "@/components/landing/HoshloopAnimation";
 import { toast } from "sonner";
 
 // Form validation schema
@@ -76,135 +77,150 @@ export default function RegisterForm() {
   };
 
   return (
+      <div className="w-full max-w-md px-4 space-y-6">
 
-    <div className="w-full max-w-md px-4 space-y-6">
+        
+        <div className="space-y-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700/20">
 
-    <div className="mx-auto max-w-md space-y-6 p-6 bg-white rounded-lg shadow-md">
-      {/* Logo Section */}
-      <div className="flex justify-center">
+
+        {/* Logo Section */}
+        <div className="flex justify-center">
           <Link href="https://hoshloop.com">
-            <h2 className="text-3xl font-bold text-black hover:opacity-80 transition">
+            <h2 className="text-3xl font-bold text-black dark:text-white hover:opacity-80 transition">
               Hosh<span className="text-green-500">Loop</span>
             </h2>
           </Link>
         </div>
+
   
-        {/* Login Box */}
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Create Account</h1>
-        <p className="text-gray-500">Register your restaurant with us</p>
+        {/* Register Box */}
+          <div className="space-y-2 text-center">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</h1>
+            <p className="text-gray-500 dark:text-gray-400">Register your restaurant with us</p>
+          </div>
+  
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="restaurantName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Restaurant Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Your Restaurant"
+                        disabled={isLoading}
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-green-500 dark:focus:border-green-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Your Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="John Doe"
+                        disabled={isLoading}
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-green-500 dark:focus:border-green-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="your@email.com"
+                        type="email"
+                        disabled={isLoading}
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-green-500 dark:focus:border-green-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+  
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="******"
+                        type="password"
+                        disabled={isLoading}
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-green-500 dark:focus:border-green-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="******"
+                        type="password"
+                        disabled={isLoading}
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-green-500 dark:focus:border-green-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+  
+              <Button 
+                type="submit" 
+                className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white" 
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating Account..." : "Create Account"}
+              </Button>
+            </form>
+          </Form>
+  
+          <div className="mt-4 text-center text-sm">
+            <p className="text-gray-600 dark:text-gray-400">
+              Already have an account?{" "}
+              <Link href="/login" className="text-stone-600 dark:text-stone-400 hover:underline hover:text-green-600 dark:hover:text-green-400">
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="restaurantName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Restaurant Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Your Restaurant"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Your Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="John Doe"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="your@email.com"
-                    type="email"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="******"
-                    type="password"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="******"
-                    type="password"
-                    disabled={isLoading}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Creating Account..." : "Create Account"}
-          </Button>
-        </form>
-      </Form>
-
-      <div className="mt-4 text-center text-sm">
-        <p>
-          Already have an account?{" "}
-          <Link href="/login" className="text-stone-600 hover:underline">
-            Sign in
-          </Link>
-        </p>
-      </div>
-    </div>
-    </div>
   );
+  
+
+  
 }
